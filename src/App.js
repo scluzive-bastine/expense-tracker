@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Col, Layout, Row } from 'antd'
+import Nav from './components/Nav/Nav'
+import Main from './components/Main/Main'
+import Details from './components/Details/Details'
+const { Header, Content } = Layout
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Layout>
+        <Header>
+          <Nav />
+        </Header>
+        <Content className='container pt-5'>
+          <Row gutter={[8, 8]}>
+            <Col xs={24} sm={24} md={6} lg={8}>
+              <Main />
+            </Col>
+            <Col xs={24} sm={24} md={18} lg={16}>
+              <Details />
+            </Col>
+          </Row>
+        </Content>
+      </Layout>
+    </>
+  )
 }
 
-export default App;
+export default App
