@@ -4,7 +4,7 @@ import Form from '../Form/Form'
 const Main = () => {
   return (
     <>
-      <Card>
+      <Card className='mCrd'>
         <div className='header'>Expense Tracker</div>
         <Form />
       </Card>

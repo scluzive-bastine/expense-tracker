@@ -6,18 +6,12 @@ import {
   ErrorPanel,
   BigTranscript,
 } from '@speechly/react-ui'
-const styles = {
-  input: {
-    border: '0',
-    background: '#EEF3F5',
-  },
-}
 const Form = () => {
   return (
     <>
       <FormInterface layout='vertical' size='large'>
         <FormInterface.Item label='Amount'>
-          <Input style={styles.input} placeholder='$500' />
+          <Input className='fifCntrl' placeholder='$500' />
         </FormInterface.Item>
         <FormInterface.Item label='Type'>
           <Select placeholder='Select Type'>
@@ -35,7 +29,7 @@ const Form = () => {
           <DatePicker />
         </FormInterface.Item>
         <FormInterface.Item label='Description'>
-          <Input.TextArea style={styles.input} />
+          <Input.TextArea className='fifCntrl' />
         </FormInterface.Item>
         <Button className='mt-3' type='primary' size='large' block>
           Create

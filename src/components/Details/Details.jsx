@@ -7,7 +7,6 @@ import DetailsModal from '../DetailsModal'
 
 const styles = {
   dtsCnt: {
-    background: '#F7FBFB',
     borderRadius: '8px',
     padding: '10px',
   },
@@ -34,8 +33,6 @@ const styles = {
   dtCtg: {
     padding: '10px',
     borderRadius: '5px',
-    background: 'rgba(18, 49, 35, 0.22)',
-    color: '#123123',
     textAlign: 'center',
   },
   dtIcn: {
@@ -46,6 +43,12 @@ const styles = {
     '&hover': {
       color: 'red',
     },
+  },
+  dtCntHd: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '10px',
+    padding: '10px',
   },
 }
 const Details = () => {
@@ -64,16 +67,20 @@ const Details = () => {
   }
   return (
     <>
-      <Card>
+      <Card className='mCrd'>
+        <div className='dtCntHd' style={styles.dtCntHd}>
+          <div>Income</div>
+          <div>Total Income: $1,500</div>
+        </div>
         <Row gutter={[8, 8]}>
           <Col xs={24} sm={24} md={6} lg={6}>
             ChartJS
           </Col>
           <Col xs={24} sm={24} md={18} lg={18}>
-            <div style={styles.dtsCnt}>
+            <div className='dtsCnt' style={styles.dtsCnt}>
               <Row gutter={[8, 8]} align='middle'>
                 <Col xs={8} sm={8} md={4} lg={4}>
-                  <div style={styles.dtCtg}>
+                  <div className='dtCtg' style={styles.dtCtg}>
                     <div>Travel</div>
                     <MdBusinessCenter style={styles.dtIcn} />
                   </div>

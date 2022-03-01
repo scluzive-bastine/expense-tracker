@@ -1,18 +1,40 @@
-import React, { useState } from 'react'
-import { Menu } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Menu, Switch } from 'antd'
 
-import './Nav.css'
+const getStorageTheme = () => {
+  let theme = 'light'
+  if (localStorage.getItem('theme')) {
+    theme = localStorage.getItem('theme')
+  }
+  return theme
+}
 
 const Nav = () => {
-  const [active, setActive] = useState('mail')
+  const [theme, setTheme] = useState(getStorageTheme)
 
-  const handleClick = (e) => {
-    setActive(e.key)
+  const changeTheme = (value) => {
+    setTheme(value ? 'dark' : 'light')
+    console.log(theme)
   }
+
+  useEffect(() => {
+    document.documentElement.className = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
   return (
     <>
-      <div className='logo'>Expense Tracker</div>
-      <Menu onClick={handleClick} selectedKeys={active} mode='horizontal'>
+      <div className='logo d-flex align-items-center'>
+        <div>Expense Tracker</div>
+        <Switch
+          checked={theme === 'dark'}
+          onChange={changeTheme}
+          size='large'
+          checkedChildren='🌜'
+          unCheckedChildren='🌞'
+          className='ms-3'
+        />
+      </div>
+      <Menu mode='horizontal'>
         <Menu.Item key='app'>.</Menu.Item>
       </Menu>
     </>
