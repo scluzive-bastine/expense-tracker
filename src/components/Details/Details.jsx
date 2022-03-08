@@ -1,49 +1,8 @@
 import React, { useState } from 'react'
-import { Card, Row, Col, Space } from 'antd'
-import { FiEdit } from 'react-icons/fi'
-import { IoTrashOutline } from 'react-icons/io5'
-import { MdBusinessCenter } from 'react-icons/md'
-import DetailsModal from '../DetailsModal'
+import { Card, Row, Col } from 'antd'
+import List from './List'
 
 const styles = {
-  dtsCnt: {
-    borderRadius: '8px',
-    padding: '10px',
-  },
-  dtEdt: {
-    width: '32px',
-    height: '32px',
-    textAlign: 'center',
-    cursor: 'pointer',
-    color: '#3DBBB4',
-    background: 'rgba(61, 187, 180, 0.22)',
-    padding: '5px',
-    borderRadius: '5px',
-  },
-  dtDlt: {
-    width: '32px',
-    height: '32px',
-    textAlign: 'center',
-    cursor: 'pointer',
-    color: '#CF4B4B',
-    background: 'rgba(207, 75, 75, 0.22)',
-    padding: '5px',
-    borderRadius: '5px',
-  },
-  dtCtg: {
-    padding: '10px',
-    borderRadius: '5px',
-    textAlign: 'center',
-  },
-  dtIcn: {
-    fontSize: '30px',
-  },
-  dtShMdl: {
-    cursor: 'pointer',
-    '&hover': {
-      color: 'red',
-    },
-  },
   dtCntHd: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -52,19 +11,6 @@ const styles = {
   },
 }
 const Details = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
-
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
   return (
     <>
       <Card className='mCrd'>
@@ -77,41 +23,10 @@ const Details = () => {
             ChartJS
           </Col>
           <Col xs={24} sm={24} md={18} lg={18}>
-            <div className='dtsCnt' style={styles.dtsCnt}>
-              <Row gutter={[8, 8]} align='middle'>
-                <Col xs={8} sm={8} md={4} lg={4}>
-                  <div className='dtCtg' style={styles.dtCtg}>
-                    <div>Travel</div>
-                    <MdBusinessCenter style={styles.dtIcn} />
-                  </div>
-                </Col>
-                <Col xs={24} sm={24} md={16} lg={16}>
-                  <div style={styles.dtShMdl} onClick={showModal}>
-                    <div>$1200</div>
-                    <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit</div>
-                    <small>02-02-2022</small>
-                  </div>
-                </Col>
-                <Col xs={24} sm={24} md={4} lg={4}>
-                  <Space size={8}>
-                    <div style={styles.dtEdt}>
-                      <FiEdit />
-                    </div>
-                    <div style={styles.dtDlt}>
-                      <IoTrashOutline />
-                    </div>
-                  </Space>
-                </Col>
-              </Row>
-            </div>
+            <List />
           </Col>
         </Row>
       </Card>
-      <DetailsModal
-        isModalVisible={isModalVisible}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
     </>
   )
 }
