@@ -11,6 +11,7 @@ import {
 } from '@speechly/react-ui'
 import moment from 'moment'
 import Edit from './Edit'
+import { expenseCategories, incomeCategories } from '../../constants/categories'
 
 const initialState = {
   amount: '',
@@ -35,6 +36,8 @@ const Form = () => {
   function handleDateChange(date, dateString) {
     setFormData({ ...formData, date: dateString })
   }
+
+  const selectedCategory = formData.type === 'Income' ? incomeCategories : expenseCategories
   return (
     <>
       {editValue ? (
@@ -44,7 +47,7 @@ const Form = () => {
           <FormInterface.Item label='Amount'>
             <Input
               className='fifCntrl'
-              placeholder='$500'
+              placeholder='500'
               type='number'
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
@@ -66,8 +69,11 @@ const Form = () => {
               value={formData.category}
               onChange={(value) => setFormData({ ...formData, category: value })}
             >
-              <Option value='Business'>Business</Option>
-              <Option value='Travel'>Travel</Option>
+              {selectedCategory.map((sc) => (
+                <Option value={sc.type} key={sc.type}>
+                  {sc.type}
+                </Option>
+              ))}
             </Select>
           </FormInterface.Item>
           <FormInterface.Item label='Date'>

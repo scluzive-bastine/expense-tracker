@@ -130,14 +130,10 @@ body {
   color: var(--clr-font);
   background: transparent;
   border: 1px solid var(--clr-dtl-border-color);
+  margin-top: 10px;
 }
 .dtsCnt small {
   color: var(--clr-font-light);
-}
-
-.dtCtg {
-  background: rgb(18, 49, 35);
-  color: rgb(58 173 166);
 }
 .header {
   color: var(--clr-font);
@@ -150,4 +146,24 @@ body {
 }
 .ant-modal-title {
   color: var(--clr-font);
+}
+.inContainer,
+.expContainer {
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+.inContainer {
+  background: #123123;
+  color: #3aada6;
+}
+.expContainer {
+  background: #d35b5b;
+  color: #ffe2e2;
+}
+.income {
+  color: #30918c;
+}
+.expense {
+  color: #d35b5b;
 }

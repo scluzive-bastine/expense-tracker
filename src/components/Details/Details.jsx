@@ -19,10 +19,10 @@ const Details = () => {
           <div>Total Income: $1,500</div>
         </div>
         <Row gutter={[8, 8]}>
-          <Col xs={24} sm={24} md={6} lg={6}>
+          {/* <Col xs={24} sm={24} md={6} lg={6}>
             ChartJS
-          </Col>
-          <Col xs={24} sm={24} md={18} lg={18}>
+          </Col> */}
+          <Col xs={24} sm={24} md={24} lg={24}>
             <List />
           </Col>
         </Row>

@@ -3,9 +3,11 @@ import { ExpenseTrackerContext } from '../../context/context'
 import { Row, Col, Space } from 'antd'
 import { FiEdit } from 'react-icons/fi'
 import { IoTrashOutline } from 'react-icons/io5'
-import { MdBusinessCenter } from 'react-icons/md'
+import { IoChatboxEllipsesOutline } from 'react-icons/io5'
 import DetailsModal from '../DetailsModal'
 import EditModal from '../Form/EditModal'
+import { expenseCategories, incomeCategories } from '../../constants/categories'
+import formatText from '../../Utils/formatText'
 
 const styles = {
   dtsCnt: {
@@ -31,11 +33,6 @@ const styles = {
     background: 'rgba(207, 75, 75, 0.22)',
     padding: '5px',
     borderRadius: '5px',
-  },
-  dtCtg: {
-    padding: '10px',
-    borderRadius: '5px',
-    textAlign: 'center',
   },
   dtIcn: {
     fontSize: '30px',
@@ -92,21 +89,40 @@ const List = () => {
   return (
     <>
       {transactions.map((transaction) => {
+        const amount = transaction.amount
+        const type = transaction.type === 'Income' ? incomeCategories : expenseCategories
+        const filteredIcon = type.filter((fl) => fl.type === transaction.category)
+        const icon = filteredIcon.map((c) => c.icon)
+        const background = filteredIcon.map((c) => c.color)
         return (
           <div className='dtsCnt' style={styles.dtsCnt} key={transaction.id}>
             <Row gutter={[8, 8]} align='middle'>
-              <Col xs={8} sm={8} md={4} lg={4}>
-                <div className='dtCtg' style={styles.dtCtg}>
-                  <div>{transaction.category}</div>
-                  <MdBusinessCenter style={styles.dtIcn} />
-                </div>
-              </Col>
-              <Col xs={24} sm={24} md={16} lg={16}>
-                <div style={styles.dtShMdl} onClick={showModal}>
-                  <div>{transaction.amount}</div>
-                  <div>{transaction.description}</div>
-                  <small>{transaction.date}</small>
-                </div>
+              <Col xs={24} sm={24} md={20} lg={20}>
+                <Row gutter={[8, 8]} align='middle'>
+                  <Col xs={4} sm={8} md={4} lg={6}>
+                    <div className={transaction.type === 'Income' ? 'inContainer' : 'expContainer'}>
+                      <div className='d-none d-sm-none d-lg-block' style={{ fontSize: '15px' }}>
+                        {transaction.category}
+                      </div>
+                      <div style={{ fontSize: '20px' }}>{icon}</div>
+                    </div>
+                  </Col>
+                  <Col xs={20} sm={24} md={16} lg={14}>
+                    <div style={styles.dtShMdl} onClick={showModal}>
+                      <div className={transaction.type == 'Income' ? 'income' : 'expense'}>
+                        ${amount.toLocaleString()}
+                      </div>
+                      <div className='d-block d-sm-none'>
+                        {formatText(transaction.description, 30)}
+                      </div>
+                      <div className='d-none d-md-block'>
+                        {formatText(transaction.description, 80)}
+                      </div>
+
+                      <small>{transaction.date}</small>
+                    </div>
+                  </Col>
+                </Row>
               </Col>
               <Col xs={24} sm={24} md={4} lg={4}>
                 <Space size={8}>
