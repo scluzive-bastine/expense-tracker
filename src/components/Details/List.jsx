@@ -47,13 +47,13 @@ const styles = {
 const List = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [checkDeleteClicked, setDeleteClicked] = useState(false)
-  const [editTransactionData, setEditTransactionData] = useState({})
-  const { transactions, deleteTransaction, setIsEditValue, editValue } =
-    useContext(ExpenseTrackerContext)
-  // const [data, setData] = useState(transactions)
+  const [showTransaction, setShowTransaction] = useState({})
+  const { transactions, deleteTransaction, setIsEditValue } = useContext(ExpenseTrackerContext)
   const [id, setId] = useState('')
-  const showModal = () => {
+  const [isEditing, setIsEditing] = useState(false)
+  const showModal = async (transaction) => {
     setIsModalVisible(true)
+    setShowTransaction(transaction)
   }
 
   const handleOk = () => setIsModalVisible(false)
@@ -62,6 +62,7 @@ const List = () => {
 
   const handleEdit = async (dt) => {
     setId(dt.id)
+    setIsEditing(isEditing === true ? false : true)
   }
   const handleDelete = (id) => {
     deleteTransaction(id)
@@ -73,18 +74,9 @@ const List = () => {
       const item = transactions.find((t) => t.id === id)
       setIsEditValue(item)
     }
-  }, [id])
+  }, [id, isEditing])
 
-  // Edit Modal
-  const [isEditModalVisible, setisEditModalVisible] = useState(false)
-
-  const showEditModal = (transaction) => {
-    setisEditModalVisible(true)
-    setEditTransactionData(transaction)
-  }
-  const handleEditModalOk = () => setisEditModalVisible(false)
-
-  const handleEditModalCancel = () => setisEditModalVisible(false)
+  useEffect(() => {}, [showTransaction])
 
   return (
     <>
@@ -108,8 +100,8 @@ const List = () => {
                     </div>
                   </Col>
                   <Col xs={20} sm={24} md={16} lg={14}>
-                    <div style={styles.dtShMdl} onClick={showModal}>
-                      <div className={transaction.type == 'Income' ? 'income' : 'expense'}>
+                    <div style={styles.dtShMdl} onClick={() => showModal(transaction)}>
+                      <div className={transaction.type === 'Income' ? 'income' : 'expense'}>
                         ${amount.toLocaleString()}
                       </div>
                       <div className='d-block d-sm-none'>
@@ -126,7 +118,6 @@ const List = () => {
               </Col>
               <Col xs={24} sm={24} md={4} lg={4}>
                 <Space size={8}>
-                  {/* <div style={styles.dtEdt} onClick={() => showEditModal(transaction)}> */}
                   <div style={styles.dtEdt} onClick={() => handleEdit(transaction)}>
                     <FiEdit />
                   </div>
@@ -140,17 +131,15 @@ const List = () => {
         )
       })}
 
-      <DetailsModal
-        isModalVisible={isModalVisible}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
-      {/* <EditModal
-        isEditModalVisible={isEditModalVisible}
-        transaction={editTransactionData}
-        handleOkhandleEditModalOk={handleEditModalOk}
-        handleCancel={handleEditModalCancel}
-      /> */}
+      {isModalVisible && (
+        <DetailsModal
+          isModalVisible={isModalVisible}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+          transaction={showTransaction}
+          key={id}
+        />
+      )}
     </>
   )
 }

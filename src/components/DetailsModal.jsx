@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button, Modal } from 'antd'
 import inc from '../images/incbg.png'
+import exp from '../images/expbg.png'
+import { incomeCategories, expenseCategories } from '../constants/categories'
 const styles = {
   dtMdCnt: {},
   dtMdhd: {
@@ -14,9 +16,6 @@ const styles = {
     fontSize: '30px',
     marginTop: '10px',
   },
-  dtMdHDdsc: {
-    color: '#3dbbb4',
-  },
   dtMdhdDtlsCnt: {
     fontSize: '15px',
   },
@@ -25,52 +24,64 @@ const styles = {
     fontWeight: '700',
   },
 }
-const DetailsModal = ({ isModalVisible, handleOk, handleCancel }) => {
+const DetailsModal = ({ isModalVisible, handleOk, handleCancel, transaction }) => {
+  const type = transaction.type === 'Income' ? incomeCategories : expenseCategories
+  const filteredIcon = type.filter((fl) => fl.type === transaction.category)
+  const icon = filteredIcon.map((c) => c.icon)
+  const amount = transaction.amount
   return (
     <Modal
-      title='Income'
+      title={transaction.type === 'Income' ? 'Income Details' : 'Expense Details'}
       visible={isModalVisible}
       onOk={handleOk}
       onCancel={handleCancel}
       footer={null}
+      centered
     >
       <div style={styles.dtMdCnt}>
         <div style={styles.dtMdHdImg} className='d-flex justify-content-center ms-auto me-auto'>
-          <img src={inc} className='img-fluid' alt='' />
+          <img src={transaction.type === 'Income' ? inc : exp} className='img-fluid' alt='' />
         </div>
         <div style={styles.dtMdhd}>
-          <div style={styles.dtMdHDt}>Income</div>
-          <div style={styles.dtMdHDdsc}>Congratulations you earned some money</div>
+          <div
+            className={transaction.type === 'Income' ? 'income' : 'expense'}
+            style={styles.dtMdHDt}
+          >
+            {transaction.type}
+          </div>
         </div>
         <div className='dtMdhdDtls mt-4'>
-          <span>Category</span>
-          <div>Business</div>
+          <span>Type</span>
+          <div className={transaction.type === 'Income' ? 'income' : 'expense'}>
+            {transaction.type}
+          </div>
         </div>
         <div className='d-flex justify-content-between'>
           <div className='dtMdhdDtls mt-4'>
             <span>Category</span>
-            <div>Business</div>
+            <div className='d-flex align-items-center'>
+              {icon} <div className='ms-1'>{transaction.category}</div>
+            </div>
           </div>
           <div className='dtMdhdDtls mt-4'>
             <span>Date</span>
-            <div>02-02-2022</div>
+            <div>{transaction.date}</div>
           </div>
         </div>
         <div className='dtMdhdDtls mt-4'>
           <span>Description</span>
-          <div>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus cum ipsum facere
-            suscipit tenetur illo quas dolore harum exercitationem debitis.
-          </div>
+          <div>{transaction.description}</div>
         </div>
         <div className='d-flex justify-content-between align-items-center'>
           <div className='dtMdhdDtls mt-4'>
             <span>Amount</span>
-            <div style={styles.dtMdhdAmt}>$3,000</div>
+            <div
+              style={styles.dtMdhdAmt}
+              className={transaction.type === 'Income' ? 'income' : 'expense'}
+            >
+              ${amount.toLocaleString()}
+            </div>
           </div>
-          <Button type='primary' size='small'>
-            Add Note
-          </Button>
         </div>
       </div>
     </Modal>

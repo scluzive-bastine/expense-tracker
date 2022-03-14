@@ -3,12 +3,11 @@ import { ExpenseTrackerContext } from '../../context/context'
 import { Button, DatePicker, Form as FormInterface, Input, Select } from 'antd'
 import moment from 'moment'
 
-import { expenseCategories, incomeCategories } from '../../constants/categories'
-
+import { incomeCategories, expenseCategories } from '../../constants/categories'
 const { Option } = Select
 
 const Edit = () => {
-  const { editTransaction, editValue, setIsEditValue, transactions } =
+  const { editTransaction, editValue, setIsEditValue, transactions, setIsEditing, isEditing } =
     useContext(ExpenseTrackerContext)
 
   // const [formData, setFormData] = useState({
@@ -39,13 +38,12 @@ const Edit = () => {
     const transaction = { ...formData, amount: Number(formData.amount) }
     editTransaction(transaction)
     setIsEditValue(null)
-    console.log(editValue)
   }
 
   useEffect(() => {
     const item = transactions.find((t) => t.id === editValue.id)
     setFormData(item)
-  }, [transactions, editValue])
+  }, [transactions, editValue, data.type, isEditing])
 
   const selectedCategory = formData.type === 'Income' ? incomeCategories : expenseCategories
 

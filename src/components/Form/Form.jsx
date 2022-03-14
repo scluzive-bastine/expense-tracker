@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Button, DatePicker, Form as FormInterface, Input, Select } from 'antd'
+import { Button, DatePicker, Form as FormInterface, Input, Select, notification } from 'antd'
 import { ExpenseTrackerContext } from '../../context/context'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -26,9 +26,21 @@ const { Option } = Select
 const Form = () => {
   const [formData, setFormData] = useState(initialState)
   const { addTransaction, editValue } = useContext(ExpenseTrackerContext)
+  const openNotification = (type) => {
+    notification[type]({
+      message: `Fill the form`,
+      description: `Amount, type, category and date needs to be entered!`,
+    })
+  }
 
   const createTransaction = () => {
-    if (Number.isNaN(Number(formData.amount))) return
+    if (
+      Number.isNaN(Number(formData.amount)) ||
+      !formData.type ||
+      !formData.category ||
+      !formData.date
+    )
+      return openNotification('error')
     const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4() }
     addTransaction(transaction)
     setFormData(initialState)
@@ -38,6 +50,7 @@ const Form = () => {
   }
 
   const selectedCategory = formData.type === 'Income' ? incomeCategories : expenseCategories
+  // useEffect(() => {}, [editValue])
   return (
     <>
       {editValue ? (

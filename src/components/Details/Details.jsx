@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Card, Row, Col } from 'antd'
 import List from './List'
+import ChartCard from './ChartCard'
+import { ExpenseTrackerContext } from '../../context/context'
 
 const styles = {
   dtCntHd: {
@@ -11,17 +13,23 @@ const styles = {
   },
 }
 const Details = () => {
+  const { balance } = useContext(ExpenseTrackerContext)
   return (
     <>
+      <Row gutter={[8, 8]}>
+        <Col xs={24} sm={24} md={24} lg={12}>
+          <ChartCard title='Income' />
+        </Col>
+        <Col xs={24} sm={24} md={24} lg={12}>
+          <ChartCard title='Expense' />
+        </Col>
+      </Row>
       <Card className='mCrd'>
         <div className='dtCntHd' style={styles.dtCntHd}>
-          <div>Income</div>
-          <div>Total Income: $1,500</div>
+          <div>Transactions</div>
+          <div>Total Balance: {balance}</div>
         </div>
         <Row gutter={[8, 8]}>
-          {/* <Col xs={24} sm={24} md={6} lg={6}>
-            ChartJS
-          </Col> */}
           <Col xs={24} sm={24} md={24} lg={24}>
             <List />
           </Col>

@@ -8,7 +8,7 @@ const formatText = (text, maxLength) => {
     //re-trim if we are in the middle of a word
     trimmedString = trimmedString.substr(
       0,
-      Math.min(trimmedString.length, trimmedString.lastIndexOf(' ')) + '...'
+      Math.min(trimmedString.length, trimmedString.lastIndexOf(' '))
     )
   }
   return trimmedString

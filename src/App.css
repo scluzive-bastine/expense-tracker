@@ -14,7 +14,8 @@
 
 .dark {
   --clr-bcg: #121212;
-  --clr-card-bcg: linear-gradient(90deg, #161616 0%, #0e0e0e 69.21%, #060606 100%);
+  /* --clr-card-bcg: linear-gradient(90deg, #161616 0%, #0e0e0e 69.21%, #060606 100%); */
+  --clr-card-bcg: #0f0f0f;
   --clr-font: #fff;
   --clr-font-light: #8b8b8b;
   --clr-primary: #3dbbb4;
@@ -166,4 +167,11 @@ body {
 }
 .expense {
   color: #d35b5b;
+}
+canvas {
+  width: 200px !important;
+  height: 200px !important;
+}
+.chrtTxt {
+  color: var(--clr-font);
 }
