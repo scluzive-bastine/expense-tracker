@@ -51,6 +51,11 @@ body {
   padding-left: 24px;
   background: var(--clr-menu-bcg);
 }
+.footer {
+  color: #ffffff;
+  text-align: center;
+  background: var(--clr-menu-bcg);
+}
 
 .ant-layout-header .ant-menu {
   color: #ffffff;
@@ -182,9 +187,46 @@ canvas {
   margin-bottom: -120px;
 }
 
+.splHder {
+  font-size: 150px;
+  font-weight: 800;
+  background-color: red;
+
+  background-image: linear-gradient(45deg, #3dbbb4, #db6d94);
+
+  background-size: 100%;
+  background-repeat: repeat;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  transition: ease-in 500ms;
+}
+.splDesc {
+  font-size: 30px;
+}
+.btc {
+  background: #db6d94;
+  border-color: #db6d94;
+  color: #ffffff;
+}
+.btn:hover {
+  background: #bb5d7e;
+  border-color: #bb5d7e;
+  color: #ffffff;
+}
+
 @media only screen and (max-width: 600px) {
   .mCrd .jPEdWG {
     position: fixed;
     margin-bottom: 0;
+  }
+  .splHder {
+    font-size: 50px;
+    font-weight: 800;
+  }
+  .splDesc {
+    font-size: 20px;
   }
 }

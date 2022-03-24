@@ -78,7 +78,10 @@ const Form = () => {
             handleDateChange('', e.value)
             break
           case 'description':
-            setFormData({ ...formData, description: e.value })
+            setFormData({
+              ...formData,
+              description: `${e.value.charAt(0)}${e.value.slice(1).toLowerCase()}`,
+            })
           default:
             break
         }
