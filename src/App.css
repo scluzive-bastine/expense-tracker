@@ -175,3 +175,16 @@ canvas {
 .chrtTxt {
   color: var(--clr-font);
 }
+
+.mCrd .jPEdWG {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: -120px;
+}
+
+@media only screen and (max-width: 600px) {
+  .mCrd .jPEdWG {
+    position: fixed;
+    margin-bottom: 0;
+  }
+}

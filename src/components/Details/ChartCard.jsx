@@ -8,7 +8,6 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 const ChartCard = ({ title }) => {
   const { total, chartData } = useTransaction(title)
-  console.log(chartData)
   return (
     <>
       <Card className='mCrd mb-3'>

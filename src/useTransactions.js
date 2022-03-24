@@ -14,7 +14,6 @@ const useTransaction = (title) => {
   })
 
   const filteredCategories = categories.filter((sc) => sc.amount > 0)
-  console.log(rightTransactions)
 
   const chartData = {
     datasets: [
